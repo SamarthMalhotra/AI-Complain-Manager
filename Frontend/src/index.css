@@ -1,0 +1,63 @@
+.light-theme {
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+
+  --nav-bg-color: #2563eb;
+  --nav-text-color: #ffffff;
+
+  --button-bg-color: #2563eb;
+  --button-text-color: #ffffff;
+
+  --h-color: #2563eb;
+
+  --link: #1d4ed8;
+}
+
+.dark-theme {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+
+  --nav-bg-color: #1e293b;
+  --nav-text-color: #ffffff;
+
+  --button-bg-color: #2563eb;
+  --button-text-color: #ffffff;
+
+  --h-color: #38bdf8;
+
+  --link: #60a5fa;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background: var(--bg-color) !important;
+  color: var(--text-color);
+  overflow-y: scroll;
+}
+
+.Link {
+  color: var(--link) !important;
+}
+
+nav,
+footer {
+  background: var(--nav-bg-color) !important;
+  color: var(--nav-text-color) !important;
+  font-weight: 500;
+  width: 100vw !important;
+}
+
+h2 {
+  color: var(--h-color) !important;
+}
+
+button {
+  background: var(--button-bg-color);
+  color: var(--button-text-color);
+  border-radius: 6px;
+  padding: 8px 14px;
+  border: none;
+}
