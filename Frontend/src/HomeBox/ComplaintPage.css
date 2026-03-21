@@ -1,0 +1,70 @@
+.page-container {
+  height: 86vh;
+  width: 100%;
+  background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/v1773473653/background_image_l1guq7.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* Left fixed box */
+
+.complaint-box {
+  position: fixed;
+  left: 3%;
+  top: 15%;
+  width: 50%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(6px);
+  box-shadow: 1px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  color: white !important;
+  margin-bottom: 30px;
+}
+
+.complaint-box button {
+  padding: 12px 30px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.complaint-box button:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .complaint-box {
+    position: fixed;
+    left: 5.5%;
+    right: 5%;
+    top: 15%;
+    width: 89%;
+    height: 60%;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  .page-container {
+    height: 80vh;
+    width: 100%;
+    background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/v1773473653/background_image_l1guq7.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

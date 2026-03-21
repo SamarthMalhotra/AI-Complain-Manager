@@ -1,4 +1,7 @@
-import signup from "Backend/models/signup.js";
+/* The line `import signup from "./models/signup.js";` is importing the `signup` module from the file
+located at "./models/signup.js". This allows the code to access and use the functionalities defined
+in the `signup` module within the current file. */
+import signup from "./models/signup.js";
 const loginfun = async (email, password, done) => {
   try {
     const user = await signup.findOne({ email });

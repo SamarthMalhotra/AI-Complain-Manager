@@ -18,15 +18,23 @@ const signupSchema = new mongoose.Schema({
       "Please fill a valid email address",
     ],
   },
-  complain: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Complain",
-  },
   password: {
     type: String,
     required: [true, "Password is Mendatory"],
     trim: true,
     minlength: [6, "Password should be atleast 6 character"],
+  },
+  complain: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Complain",
+      default: null,
+    },
+  ],
+  role: {
+    type: String,
+    enum: ["Admin", "User"],
+    default: "User",
   },
 });
 

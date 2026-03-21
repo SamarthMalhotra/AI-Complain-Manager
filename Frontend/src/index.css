@@ -1,5 +1,5 @@
 .light-theme {
-  --bg-color: #f8fafc;
+  --bg-color: #cfe2ff;
   --text-color: #1e293b;
 
   --nav-bg-color: #2563eb;
@@ -37,11 +37,6 @@ body {
   color: var(--text-color);
   overflow-y: scroll;
 }
-
-.Link {
-  color: var(--link) !important;
-}
-
 nav,
 footer {
   background: var(--nav-bg-color) !important;

@@ -2,23 +2,31 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 //Complain Route
-import complainRoute from "Backend/router/complainRoute.js";
+import complainRoute from "./router/complainRoute.js";
 //Admin Route
-import adminRoute from "Backend/router/adminRoute.js";
+import adminRoute from "./router/adminRoute.js";
 import passport from "passport";
 //Signup route
-import signupRoute from "Backend/router/signupRoute.js";
+import signupRoute from "./router/signupRoute.js";
 //Dotenv
 dotenv.config();
 //Server
 const server = express();
+//Connect backend with frontend
+server.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  }),
+);
 //PORT
 const PORT = process.env.PORT;
 //Passport Local Strategy
 import { Strategy as LocalStrategy } from "passport-local";
 //Login function
-import loginfun from "Backend/local.js";
+import loginfun from "./local.js";
 //It convert json object in js object
 server.use(passport.initialize());
 passport.use(
@@ -35,7 +43,7 @@ server.use("/api/complain/", complainRoute);
 //Signup Route
 server.use("/api", signupRoute);
 //Admin Route
-server.use("/api", adminRoute);
+server.use("/api/admin", adminRoute);
 // Server listening and Database connection
 const connectDatabase = () => {
   mongoose

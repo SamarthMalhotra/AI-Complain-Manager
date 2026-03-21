@@ -1,0 +1,16 @@
+/* Error popup*/
+.toast-message {
+  color: black;
+  font-size: 20px;
+  width: 60vw;
+  padding: 30px 20px;
+}
+@media (max-width: 600px) {
+  .toast-message {
+    color: black;
+    font-size: 16px;
+    width: 90vw;
+    padding: 30px 20px;
+    margin-left: 15px;
+  }
+}

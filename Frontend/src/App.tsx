@@ -1,7 +1,15 @@
 import "./App.css";
-import Navbar from "./Navbar.tsx";
-
+import { ToastContainer } from "react-toastify";
+import { ProjectProvider } from "./ContextAPI/Context/provider.tsx";
+import { Outlet } from "react-router-dom";
 function App() {
-  return <Navbar />;
+  return (
+    <>
+      <ProjectProvider>
+        <ToastContainer />
+        <Outlet />
+      </ProjectProvider>
+    </>
+  );
 }
 export default App;

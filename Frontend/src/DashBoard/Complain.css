@@ -1,0 +1,114 @@
+/* MAIN CONTAINER */
+.complain-page {
+  width: 90%;
+  margin: 0 auto; /* center horizontally */
+  padding: 15px 0;
+}
+
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* CARD */
+.complain-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.complain-card:hover {
+  transform: scale(1.01);
+}
+
+/* ================= STATUS (UPDATED) ================= */
+
+/* STATUS CONTAINER */
+.status-box {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* spacing between steps */
+  margin-bottom: 15px;
+}
+
+/* EACH STEP */
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  font-size: 14px;
+}
+
+/* BADGE (circle number) */
+.status-item .badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONNECTING LINE
+.status-item {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  background: #ccc;
+  transform: translateY(-50%);
+} */
+
+/* REMOVE LINE FROM LAST */
+.status-item:last-child::after {
+  display: none;
+}
+
+/* =================================================== */
+
+/* Description */
+.description {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Read more */
+.read-more {
+  display: inline-block;
+  margin-top: 5px;
+  color: blue;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* Reply */
+.replyBox {
+  margin-top: 15px;
+}
+
+.replyBox textarea {
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .complain-page {
+    width: 95%;
+  }
+
+  .status-box {
+    gap: 10px;
+  }
+
+  .status-item {
+    font-size: 12px;
+  }
+}

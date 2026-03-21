@@ -24,8 +24,12 @@ const complainSchema = new mongoose.Schema(
       maxlength: [10, "Contract Number should be 10 digit"],
     },
     status: {
+      type: Number,
+      default: 0,
+    },
+    reply: {
       type: String,
-      default: "pending",
+      default: null,
     },
   },
   {
