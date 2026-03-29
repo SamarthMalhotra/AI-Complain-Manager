@@ -3,9 +3,9 @@ import Complain from "./Complain";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="container-fluid px-0">
-      <div className="row g-0">
-        <div className="col-12 px-0">
+    <div className="container-fluid p-4">
+      <div className="row g-1">
+        <div className="col-12 px-2">
           <Complain />
         </div>
       </div>

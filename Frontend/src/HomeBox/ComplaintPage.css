@@ -1,11 +1,15 @@
 .page-container {
-  height: 86vh;
+  min-height: 86vh;
   width: 100%;
-  background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/v1773473653/background_image_l1guq7.jpg");
-  background-size: cover;
-  background-position: center;
   padding: 0;
   margin: 0;
+  /* Optimized background image */
+  background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/w_800,f_auto,q_auto/background_image_l1guq7.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Performance improvement */
+  will-change: transform;
 }
 
 /* Left fixed box */
@@ -13,7 +17,7 @@
 .complaint-box {
   position: fixed;
   left: 3%;
-  top: 15%;
+  top: 10%;
   width: 50%;
   height: 80%;
   background: rgba(0, 0, 0, 0.55);
@@ -60,9 +64,9 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
   .page-container {
-    height: 80vh;
+    height: 90vh;
     width: 100%;
-    background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/v1773473653/background_image_l1guq7.jpg");
+    background-image: url("https://res.cloudinary.com/duryxhwcp/image/upload/w_800,f_auto,q_auto/background_image_l1guq7.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

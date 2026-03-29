@@ -13,10 +13,10 @@ const Complain = () => {
   };
 
   return (
-    <div className="complain-page">
+    <div className="complain-page p-3">
       {/* Header */}
       <div className="dashboard-header mb-3 text-center">
-        <h2 className="fw-bold">Complaints Dashboard</h2>
+        <h2 className="fw-bold mt-3">Complaints Dashboard</h2>
       </div>
 
       {data.length !== 0 ? (
@@ -26,7 +26,7 @@ const Complain = () => {
           return (
             <div
               key={index}
-              className="complain-card shadow-sm p-3 mb-4 bg-white rounded"
+              className="complain-card shadow-sm p-4 mb-4 bg-white rounded"
             >
               {/* STATUS */}
               <div className="status-box">

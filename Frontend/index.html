@@ -1,13 +1,69 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+
+    <!-- Title -->
+    <title>Smart Complaint Management System | AI Agent Support</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="A smart complaint management system with AI Agent support. Easily register, track, and resolve complaints in real-time with automated assistance."
+    />
+    <meta
+      name="keywords"
+      content="complaint management system, AI agent, complaint portal, issue tracking, grievance system, support system, web app"
+    />
+
+    <meta name="author" content="Samarth Malhotra" />
+
+    <!-- Open Graph (for social media sharing) -->
+    <meta
+      property="og:title"
+      content="Smart Complaint Management System with AI Agent"
+    />
+    <meta
+      property="og:description"
+      content="Register and track complaints easily with our AI-powered complaint management platform."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:image" content="/preview.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Complaint Management System" />
+    <meta
+      name="twitter:description"
+      content="Manage complaints efficiently using AI-powered automation."
+    />
+    <meta name="twitter:image" content="/preview.png" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0d6efd" />
   </head>
   <body class="light-theme">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="text/javascript">
+      (function (d, t) {
+        var v = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+        v.onload = function () {
+          window.voiceflow.chat.load({
+            verify: { projectID: "69c2bdff21d3bd780917a6b3" },
+            url: "https://general-runtime.voiceflow.com",
+            versionID: "production",
+            voice: {
+              url: "https://runtime-api.voiceflow.com",
+            },
+          });
+        };
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+        v.type = "text/javascript";
+        s.parentNode.insertBefore(v, s);
+      })(document, "script");
+    </script>
   </body>
 </html>
