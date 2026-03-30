@@ -17,7 +17,7 @@ const server = express();
 //Connect backend with frontend
 server.use(
   cors({
-    origin: "https://ai-complain-manager-backend.onrender.com",
+    origin: "https://ai-complain-manager-frontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );
