@@ -1,1 +1,1 @@
-export const Url: string = "http://localhost:8000";
+export const Url: string = "https://ai-complain-manager-backend.onrender.com";
