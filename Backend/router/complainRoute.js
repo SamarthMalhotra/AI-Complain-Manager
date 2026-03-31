@@ -19,7 +19,6 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
     const complain1 = new Complain(complain);
     const com = await complain1.save();
     user.complain.unshift(com._id);
-    await user.save();
     //Send Email
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -35,15 +34,48 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
       from: "samarthmalhotra5200@gmail.com",
       to: email,
       subject: complain.title,
-      text: complain.description + ` Register Successful`, // Plain-text version of the message
+      text: `Dear ${complain.user || "Customer"},
+
+Thank you for reaching out to us. Your complaint has been successfully registered.
+
+Here are your complaint details:
+
+-----------------------------------
+Complaint Title: ${complain.title}
+Description: ${complain.description}
+Date: ${new Date().toLocaleString()}
+-----------------------------------
+
+Our team will review your complaint and get back to you as soon as possible.
+
+We appreciate your patience.
+
+Regards,
+Support Team
+`, // Plain-text version of the message
     });
     //Mail is going to mail operator
     const operator = await transporter.sendMail({
-      from: "samarthmalhotra5200@gmail.com",
-      to: "operator1234@gmail.com",
+      from: email,
+      to: "samarthmalhotra5200@gmail.com",
       subject: complain.title,
-      text: complain.description + `Complain Received`, // Plain-text version of the message
+      text: `Dear Operator,
+
+A new complaint has been received through the system. Please find the details below:
+
+-----------------------------------
+Complaint Title: ${complain.title}
+Description: ${complain.description}
+Submitted By: ${user.name || "Anonymous"}
+Date: ${new Date().toLocaleString()}
+-----------------------------------
+
+Kindly review and take the necessary action.
+
+Thank you,
+Complaint Management System`, // Plain-text version of the message
     });
+    await user.save();
     res.status(201).json({ message: "Complain registered successfully" });
   } catch (e) {
     res.status(500).json({ message: "Internal Server Error." });
