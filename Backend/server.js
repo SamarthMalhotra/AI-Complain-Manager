@@ -18,8 +18,8 @@ const server = express();
 //origin: "http://localhost:5173",
 server.use(
   cors({
-    // origin: "https://ai-complain-manager-frontend.onrender.com",
-    origin: "http://localhost:5173",
+    origin: "https://ai-complain-manager-frontend.onrender.com",
+    // origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );
