@@ -47,11 +47,9 @@ Kindly review and take the necessary action.
 Thank you,
 Complaint Management System`, // Plain-text version of the message
   });
-  return new Promise((resolve, reject) => {
-    if (info && operator) {
-      resolve("Emails sent successfully");
-    } else {
-      reject("Failed to send emails");
-    }
-  });
+  if (info && operator) {
+    return "Emails sent successfully";
+  } else {
+    throw new Error("Failed to send emails");
+  }
 }
