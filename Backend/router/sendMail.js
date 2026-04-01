@@ -5,7 +5,7 @@ export default async function sendMail(complain, user) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
-    port: 465,
+    port: 587,
     auth: {
       user: "samarthmalhotra5200@gmail.com",
       pass: process.env.Email_PASSWORD,
