@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 export default async function sendMail(complain, user) {
   //Send Email
+  console.log("Sending email...", user);
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
@@ -15,7 +16,7 @@ export default async function sendMail(complain, user) {
     from: "samarthmalhotra5200@gmail.com",
     to: user.email,
     subject: complain.title,
-    text: `Dear ${user.name || "Customer"},
+    text: `Dear ${user.username || "Customer"},
 
 Thank you for reaching out to us. Your complaint has been successfully registered.
 
@@ -37,7 +38,7 @@ Support Team
   });
   //Mail is going to mail operator
   const operator = await transporter.sendMail({
-    from: user.email,
+    from: "samarthmalhotra5200@gmail.com",
     to: "samarthmalhotra5200@gmail.com",
     subject: complain.title,
     text: `Dear Operator,
@@ -47,7 +48,8 @@ A new complaint has been received through the system. Please find the details be
 -----------------------------------
 Complaint Title: ${complain.title}
 Description: ${complain.description}
-Submitted By: ${user.name || "Anonymous"}
+Submitted By: ${user.username || "Anonymous"}
+Customer Email: ${user.email}
 Date: ${new Date().toLocaleString()}
 -----------------------------------
 
