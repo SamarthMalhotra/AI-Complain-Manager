@@ -23,8 +23,8 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
     console.log("------------------");
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      secure: false,
-      port: 587,
+      secure: true,
+      port: 465,
       auth: {
         user: "samarthmalhotra5200@gmail.com",
         pass: process.env.Email_PASSWORD,
