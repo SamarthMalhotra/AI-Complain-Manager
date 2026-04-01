@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 export default async function sendMail(complain, user) {
   //Send Email
-  console.log("Sending email...", user);
   const transporter = nodemailer.createTransport({
     service: "gmail",
     secure: true,
