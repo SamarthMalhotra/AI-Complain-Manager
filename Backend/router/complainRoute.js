@@ -26,7 +26,7 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
       .status(201)
       .json({ message: "Complain registered successfully , " + result });
   } catch (e) {
-    res.status(500).json({ message: e.message + result });
+    res.status(500).json({ message: e.message });
   }
 });
 //Status Check
