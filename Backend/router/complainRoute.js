@@ -23,7 +23,7 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
     await user.save();
     res.status(201).json({ message: "Complain registered successfully" });
   } catch (e) {
-    res.status(500).json({ message: "Internal Server Error." });
+    res.status(500).json({ message: e.message });
   }
 });
 //Status Check
