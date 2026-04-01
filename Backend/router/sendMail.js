@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 export default async function sendMail(complain, user) {
+  console.log("------------------");
   //Send Email
   console.log("Sending email...", user);
   const transporter = nodemailer.createTransport({
@@ -58,6 +59,7 @@ Kindly review and take the necessary action.
 Thank you,
 Complaint Management System`, // Plain-text version of the message
   });
+  console.log("------------------" + info.response + " " + operator.response);
   return new Promise((resolve, reject) => {
     if (info && operator) {
       resolve("Emails sent successfully");
