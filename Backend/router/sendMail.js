@@ -4,7 +4,7 @@ export default async function sendMail(complain, user) {
   console.log("Sending email...", user);
   const transporter = nodemailer.createTransport({
     service: "gmail",
-    secure: true,
+    secure: false,
     port: 587,
     auth: {
       user: "samarthmalhotra5200@gmail.com",
