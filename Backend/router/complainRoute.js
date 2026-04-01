@@ -1,5 +1,6 @@
 import express from "express";
 import Complain from "../models/complain.js";
+import nodemailer from "nodemailer";
 import sendMail from "./sendMail.js";
 import signup from "../models/signup.js";
 import { jwtAuthMiddleware } from "../jwt.js";

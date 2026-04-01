@@ -1,4 +1,3 @@
-import nodemailer from "nodemailer";
 export default async function sendMail(complain, user) {
   console.log("------------------");
   //Send Email
