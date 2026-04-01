@@ -19,7 +19,13 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
     const complain1 = new Complain(complain);
     const com = await complain1.save();
     user.complain.unshift(com._id);
-    let result = await sendMail(complain, user);
+    let result = "";
+
+    try {
+      result = await sendMail(complain, user);
+    } catch (err) {
+      console.log("Mail failed:", err.message);
+    }
     await user.save();
     res
       .status(201)
