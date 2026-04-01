@@ -15,11 +15,10 @@ dotenv.config();
 //Server
 const server = express();
 //Connect backend with frontend
-//origin: "http://localhost:5173",
 server.use(
   cors({
     origin: "https://ai-complain-manager-frontend.onrender.com",
-    // origin: "http://localhost:5173",
+    //origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );

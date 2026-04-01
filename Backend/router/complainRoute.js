@@ -1,6 +1,5 @@
 import express from "express";
 import Complain from "../models/complain.js";
-import nodemailer from "nodemailer";
 import sendMail from "./sendMail.js";
 import signup from "../models/signup.js";
 import { jwtAuthMiddleware } from "../jwt.js";
@@ -20,73 +19,14 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
     const complain1 = new Complain(complain);
     const com = await complain1.save();
     user.complain.unshift(com._id);
-    console.log("------------------");
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      secure: true,
-      port: 465,
-      auth: {
-        user: "samarthmalhotra5200@gmail.com",
-        pass: process.env.Email_PASSWORD,
-      },
-    });
-    //Mail is going to Client
-    const info = await transporter.sendMail({
-      from: "samarthmalhotra5200@gmail.com",
-      to: user.email,
-      subject: complain.title,
-      text: `Dear ${user.username || "Customer"},
-
-Thank you for reaching out to us. Your complaint has been successfully registered.
-
-Here are your complaint details:
-
------------------------------------
-Complaint Title: ${complain.title}
-Description: ${complain.description}
-Date: ${new Date().toLocaleString()}
------------------------------------
-
-Our team will review your complaint and get back to you as soon as possible.
-
-We appreciate your patience.
-
-Regards,
-Support Team
-`, // Plain-text version of the message
-    });
-    //Mail is going to mail operator
-    const operator = await transporter.sendMail({
-      from: "samarthmalhotra5200@gmail.com",
-      to: "samarthmalhotra5200@gmail.com",
-      subject: complain.title,
-      text: `Dear Operator,
-
-A new complaint has been received through the system. Please find the details below:
-
------------------------------------
-Complaint Title: ${complain.title}
-Description: ${complain.description}
-Submitted By: ${user.username || "Anonymous"}
-Customer Email: ${user.email}
-Date: ${new Date().toLocaleString()}
------------------------------------
-
-Kindly review and take the necessary action.
-
-Thank you,
-Complaint Management System`, // Plain-text version of the message
-    });
-    /* try {
-      await sendMail(complain, user);
-    } catch (err) {
-      console.log("MAIL ERROR:", err.message);
-    }
-    console.log("------------------");*/
+    let result = await sendMail(complain, user);
     await user.save();
-    res.status(201).json({ message: "Complain registered successfully" });
+
+    res
+      .status(201)
+      .json({ message: "Complain registered successfully , " + result });
   } catch (e) {
-    res.status(500).json({ message: e });
+    res.status(500).json({ message: e.message + result });
   }
 });
 //Status Check
