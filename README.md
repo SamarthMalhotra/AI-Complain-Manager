@@ -4,12 +4,18 @@
 AI-powered complaint management system built using MERN stack.
 
 ## Features
-• Integrated a conversational AI chatbot for automated complaint handling
+- 🤖 Conversational AI chatbot for automated complaint handling and resolution
+  
+- 📊 Real-time complaint tracking and status monitoring
+  
+- 🔐 Secure JWT/Passport authentication
+  
+- 🚀 Scalable microservices 
 
-• Designed a scalable backend architecture using Node.js and Express
-
-• Implemented a CI/CD pipeline using GitHub Actions for automated deployment
-
+- 🔄 Automated CI/CD pipeline with GitHub Actions
+  
+- 📱 Responsive design for mobile and desktop
+  
 ## Tech Stack
 #Frontend: React with TypeScript
 
@@ -21,12 +27,15 @@ Authentication: JWT / Passport
 
 AI: Voiceflow
 
-## Installation
-#git clone repo
+## Installation & Setup
 
-#npm install
+### Prerequisites
+- Node.js (v14+)
+- MongoDB
+- Git
 
-#npm start
-
-
-##Live :https://ai-complain-manager-frontend.onrender.com/
+### Steps
+1. Clone the repository
+   ```bash
+   git clone https://github.com/SamarthMalhotra/AI-Complain-Manager.git
+   cd AI-Complain-Manager
