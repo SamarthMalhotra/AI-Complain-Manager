@@ -17,7 +17,7 @@ AI-powered complaint management system built using MERN stack.
 - 📱 Responsive design for mobile and desktop
   
 ## Tech Stack
-#Frontend: React with TypeScript
+-Frontend: React with TypeScript
 
 Backend: Node.js, Express.js
 
@@ -34,13 +34,16 @@ AI: Voiceflow
 - MongoDB
 - Git
 Live link : complain-manager-frontend.onrender.com
+
 ### Steps
 
 1. Clone the repository
    ```bash
    git clone https://github.com/SamarthMalhotra/AI-Complain-Manager.git
+   
    cd AI-Complain-Manager
 
 2. Install dependencies
+   
    npm install
    
