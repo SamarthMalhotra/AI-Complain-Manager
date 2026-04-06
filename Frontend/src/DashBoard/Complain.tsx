@@ -12,11 +12,15 @@ const Complain = () => {
     setExpandedIndex((prev) => (prev === index ? null : index));
   };
 
+  const statusSteps = ["Register", "Received", "Reply"];
+
   return (
-    <div className="complain-page p-3">
+    <div className="complain-page container py-1">
       {/* Header */}
-      <div className="dashboard-header mb-3 text-center">
-        <h2 className="fw-bold mt-3">Complaints Dashboard</h2>
+      <div className="dashboard-header mb-4 text-center">
+        <h2 className="fw-bold py-3 px-2 rounded text-white header-bg shadow-sm">
+          Complaints Dashboard
+        </h2>
       </div>
 
       {data.length !== 0 ? (
@@ -26,50 +30,66 @@ const Complain = () => {
           return (
             <div
               key={index}
-              className="complain-card shadow-sm p-4 mb-4 bg-white rounded"
+              className="complain-card card mb-4 shadow-sm rounded"
             >
-              {/* STATUS */}
-              <div className="status-box">
-                <div className="status-item">
-                  <span className="badge bg-primary rounded-circle p-2">1</span>
-                  <div>
-                    Register {complain.status > 0 && <IoCheckmarkDoneSharp />}
-                  </div>
+              <div className="card-body">
+                {/* STATUS TRACKER */}
+                <div className="status-box d-flex justify-content-between align-items-center mb-3">
+                  {statusSteps.map((step, i) => {
+                    const isCompleted = complain.status > i;
+                    const isCurrent = complain.status === i;
+                    const badgeColor = isCompleted
+                      ? "bg-success"
+                      : isCurrent
+                        ? "bg-primary"
+                        : "bg-secondary";
+
+                    return (
+                      <div
+                        key={i}
+                        className="status-item d-flex flex-column align-items-center flex-fill"
+                      >
+                        <div className="d-flex align-items-center">
+                          {i > 0 && (
+                            <div className="status-line flex-fill"></div>
+                          )}
+                          <span
+                            className={`badge rounded-circle p-2 ${badgeColor}`}
+                          >
+                            {i + 1}
+                          </span>
+                          {i < statusSteps.length - 1 && (
+                            <div className="status-line flex-fill"></div>
+                          )}
+                        </div>
+                        <small
+                          className={`mt-1 fw-semibold ${isCompleted ? "text-success" : ""}`}
+                        >
+                          {step} {isCompleted && <IoCheckmarkDoneSharp />}
+                        </small>
+                      </div>
+                    );
+                  })}
                 </div>
 
-                <div className="status-item">
-                  <span className="badge bg-warning text-dark rounded-circle p-2">
-                    2
-                  </span>
-                  <div>
-                    Received {complain.status > 1 && <IoCheckmarkDoneSharp />}
-                  </div>
-                </div>
+                {/* TITLE & DATE */}
+                <h5 className="card-title fw-bold text-dark">
+                  {complain.title}
+                </h5>
+                <p className="text-secondary small mb-2">{complain.date}</p>
 
-                <div className="status-item">
-                  <span className="badge bg-success rounded-circle p-2">3</span>
-                  <div>
-                    Reply {complain.status > 2 && <IoCheckmarkDoneSharp />}
-                  </div>
-                </div>
-              </div>
-
-              {/* BODY */}
-              <div className="complain-body">
-                <h5 className="fw-bold">{complain.title}</h5>
-                <p className="text-muted small">{complain.date}</p>
-
-                <div className={`description ${expanded ? "expanded" : ""}`}>
+                {/* DESCRIPTION */}
+                <p className="card-text description mb-2">
                   {expanded
                     ? complain.description
-                    : complain.description.slice(0, 120)}
-                </div>
+                    : complain.description.slice(0, 120) +
+                      (complain.description.length > 120 ? "..." : "")}
+                </p>
 
                 {complain.description.length > 120 && (
                   <span
-                    className="read-more text-primary"
+                    className="read-more text-primary fw-semibold"
                     onClick={() => toggleExpand(index)}
-                    style={{ cursor: "pointer" }}
                   >
                     {expanded ? "Show less" : "Read more"}
                   </span>
@@ -77,15 +97,16 @@ const Complain = () => {
 
                 {/* REPLY */}
                 <div className="replyBox mt-3">
-                  <h6 className="fw-bold">Reply</h6>
-
-                  {complain.reply && complain.reply.trim() !== "" && (
+                  <h6 className="fw-bold mb-2">Reply</h6>
+                  {complain.reply && complain.reply.trim() !== "" ? (
                     <textarea
-                      className="form-control"
+                      className="form-control reply-textarea"
                       rows={3}
                       value={complain.reply}
                       readOnly
                     />
+                  ) : (
+                    <p className="text-muted fst-italic">No reply yet</p>
                   )}
                 </div>
               </div>
@@ -93,7 +114,9 @@ const Complain = () => {
           );
         })
       ) : (
-        <h4 className="text-center text-muted">No complaints available.</h4>
+        <h4 className="text-center text-muted mt-5">
+          No complaints available.
+        </h4>
       )}
     </div>
   );

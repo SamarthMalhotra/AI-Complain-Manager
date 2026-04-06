@@ -144,9 +144,14 @@ const Navbar = () => {
           className={` ${isMenuOpen ? "visible_menu-box" : "invisible_menu-box "}`}
         >
           <Link to="/home">Home</Link>
-          {role.current == "User" && <Link to="/dashboard">Dashboard</Link>}
           <Link to="/register">Register Complaint</Link>
 
+          {role.current == "User" && (
+            <Link to="/dashboard" onClick={accessComplain}>
+              {" "}
+              <span>Dashboard </span>
+            </Link>
+          )}
           {role.current == "Admin" && (
             <Link to="" onClick={adminComplain}>
               Admin

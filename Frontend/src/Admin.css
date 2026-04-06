@@ -1,0 +1,43 @@
+/* Navbar */
+.navbar {
+  border-radius: 0 0 10px 10px;
+}
+
+/* Stats Cards */
+.card {
+  border-radius: 10px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Border for stats */
+.border-info {
+  border-left: 5px solid #17a2b8 !important;
+}
+.border-warning {
+  border-left: 5px solid #ffc107 !important;
+}
+.border-success {
+  border-left: 5px solid #28a745 !important;
+}
+
+/* Complaint Card */
+.card.border-start-4 {
+  border-left: 5px solid #007bff;
+}
+
+/* Reply box */
+.reply-box {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btn-primary {
+  border-radius: 5px;
+}
