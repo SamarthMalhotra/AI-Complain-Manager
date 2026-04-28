@@ -1,6 +1,7 @@
 import { Url } from "../Url.tsx";
 
 export const createComplain = async (complainForm: any, token: string) => {
+  console.log(complainForm);
   const res = await fetch(`${Url}/api/complain`, {
     method: "POST",
     headers: {
@@ -9,7 +10,6 @@ export const createComplain = async (complainForm: any, token: string) => {
     },
     body: JSON.stringify(complainForm),
   });
-
   const result = await res.json();
 
   if (!res.ok) {
@@ -68,4 +68,26 @@ export const getComplains = async (token: string) => {
   }
 
   return result;
+};
+export const complainDelete = async (id: string, token: string) => {
+  const response = await fetch(`${Url}/api/complain/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id }),
+  });
+  return response.json();
+};
+
+export const accessComapanyList = async (token: string) => {
+  const response = await fetch(`${Url}/api/company/access`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
 };

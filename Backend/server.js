@@ -10,6 +10,8 @@ import adminRoute from "./router/adminRoute.js";
 import passport from "passport";
 //Signup route
 import signupRoute from "./router/signupRoute.js";
+//Company Route
+import companyRoute from "./router/companyRoute.js";
 //Dotenv
 dotenv.config();
 //Server
@@ -40,11 +42,13 @@ server.use(express.json());
 //It convert urlencoded data in req body
 server.use(express.urlencoded({ extended: true }));
 //Complain route
-server.use("/api/complain/", complainRoute);
+server.use("/api/complain", complainRoute);
 //Signup Route
 server.use("/api", signupRoute);
 //Admin Route
 server.use("/api/admin", adminRoute);
+//Company Route
+server.use("/api/company", companyRoute);
 // Server listening and Database connection
 const connectDatabase = () => {
   mongoose

@@ -1,11 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ProjectContext } from "./ContextAPI/Context/context";
 import { TailSpin } from "react-loader-spinner";
-
 const ComplaintForm: React.FC = () => {
-  const { complainForm, setComplainForm, submitComplain, submit } =
-    useContext(ProjectContext)!;
-
+  const {
+    complainForm,
+    setComplainForm,
+    submitComplain,
+    submit,
+    accessCompany,
+  } = useContext(ProjectContext)!;
+  const [companyList, setCompanyList] = useState([
+    { _id: "", name: "Select the Company" },
+  ]);
+  //Fetch the company list
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await accessCompany();
+      setCompanyList((prev) => [...prev, ...data]);
+    };
+    fetchData();
+  }, []);
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -14,7 +28,6 @@ const ComplaintForm: React.FC = () => {
     const { name, value } = e.target;
     setComplainForm({ ...complainForm, [name]: value });
   };
-
   return (
     <>
       {submit ? (
@@ -32,7 +45,7 @@ const ComplaintForm: React.FC = () => {
         <div className="container d-flex justify-content-center align-items-center vh-100">
           <div
             className="card shadow-lg border-0 rounded-4 p-4"
-            style={{ width: "450px" }}
+            style={{ width: "500px" }}
           >
             <form onSubmit={submitComplain}>
               <fieldset className="border p-4 rounded-4">
@@ -40,9 +53,27 @@ const ComplaintForm: React.FC = () => {
                   Register Complaint
                 </legend>
 
+                {/* Select Company*/}
+                <div className="mb-2">
+                  <label className="form-label fw-semibold">
+                    Product Brand
+                  </label>
+                  <select
+                    className="form-select rounded-3"
+                    name="company"
+                    value={complainForm.company}
+                    onChange={handleChange}
+                    required
+                  >
+                    {companyList?.map((com) => (
+                      <option key={com._id} value={com._id}>
+                        {com.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {/* Title */}
-                {/* Title */}
-                <div className="mb-3">
+                <div className="mb-2">
                   <label className="form-label fw-semibold">Title</label>
                   <select
                     className="form-select rounded-3"
@@ -61,7 +92,7 @@ const ComplaintForm: React.FC = () => {
                 </div>
 
                 {/* Date */}
-                <div className="mb-3">
+                <div className="mb-2">
                   <label className="form-label fw-semibold">Date</label>
                   <input
                     type="date"
@@ -74,7 +105,7 @@ const ComplaintForm: React.FC = () => {
                 </div>
 
                 {/* Description */}
-                <div className="mb-3">
+                <div className="mb-2">
                   <label className="form-label fw-semibold">Description</label>
                   <textarea
                     className="form-control rounded-3"

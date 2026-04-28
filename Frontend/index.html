@@ -42,6 +42,31 @@
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#0d6efd" />
+
+    <style>
+      /* Default (Desktop) */
+      iframe[src*="voiceflow"] {
+        position: fixed !important;
+        right: 20px !important;
+        bottom: 20px !important;
+        width: 400px !important;
+        height: 600px !important;
+        border-radius: 12px !important;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Mobile View */
+      @media (max-width: 768px) {
+        iframe[src*="voiceflow"] {
+          width: 50vw !important; /* 50% width */
+          height: 60vh !important; /* 👈 NOT full height */
+          left: 10px !important; /* stick to right */
+          bottom: 10px !important; /* small margin from bottom */
+          top: auto !important; /* ❌ remove top stretching */
+          border-radius: 12px !important;
+        }
+      }
+    </style>
   </head>
   <body class="light-theme">
     <div id="root"></div>

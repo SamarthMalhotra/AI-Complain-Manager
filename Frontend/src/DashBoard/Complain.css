@@ -1,3 +1,7 @@
+.double-underline {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+}
 /* Header */
 .header-bg {
   background: linear-gradient(90deg, #4b79a1, #283e51);
@@ -41,6 +45,13 @@
 }
 .read-more:hover {
   text-decoration: underline;
+}
+.deleteComplain {
+  width: auto;
+  color: red;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 /* Reply box */

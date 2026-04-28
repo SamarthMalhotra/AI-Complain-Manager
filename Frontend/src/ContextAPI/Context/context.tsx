@@ -8,6 +8,7 @@ type signupForm = {
   password: string;
 };
 type complain = {
+  company: string;
   title: string;
   date: string;
   description: string;
@@ -34,5 +35,7 @@ interface ProjectContextType {
   complaints: Complaint[];
   reply: RefObject<HTMLTextAreaElement | null>;
   handleReply: (id: string, e: React.FormEvent, oldReply?: string) => void;
+  deleteComplain: (id: string) => void;
+  accessCompany: () => Promise<Array<{ _id: string; name: string }>>;
 }
 export const ProjectContext = createContext<ProjectContextType | null>(null);

@@ -31,6 +31,10 @@ const complainSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
   },
   {
     toJSON: { getters: true },

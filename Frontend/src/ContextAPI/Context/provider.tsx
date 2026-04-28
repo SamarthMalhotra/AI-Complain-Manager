@@ -6,6 +6,8 @@ import {
   getComplains,
   adminComplains,
   adminReply,
+  complainDelete,
+  accessComapanyList,
 } from "../Services/complainService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -40,6 +42,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
     description: "",
     contractNumber: "",
     status: 0,
+    company: "",
   });
   //Navigate
   const navigate = useNavigate();
@@ -74,6 +77,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
             description: complain.description,
             date: complain.date,
             reply: complain.reply,
+            //company: complain.company,
           };
         }),
       );
@@ -141,7 +145,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         return;
       } else {
         let ans = reply.current.value;
-        if (oldReply != "") {
+        if (oldReply != "" && oldReply != null) {
           ans = oldReply + ans;
         }
         const response = await adminReply(ans, token, id);
@@ -189,9 +193,17 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
     e.preventDefault();
     setSubmit(true);
     const token = localStorage.getItem("cm");
-    if (!token) return;
-
+    if (!token) {
+      setSubmit(false);
+      toast.error("You are not authenticated, Go for Login OR Signup", {
+        position: "top-center",
+        className: "toast-message",
+      });
+      navigate("/home", { replace: true });
+      return;
+    }
     try {
+      console.log(complainForm);
       const result = await createComplain(complainForm, token);
       toast.success(result.message, {
         position: "top-center",
@@ -203,6 +215,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         description: "",
         contractNumber: "",
         status: 0,
+        company: "",
       });
       setSubmit(false);
       navigate("/home");
@@ -214,6 +227,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
       setSubmit(false);
     }
   };
+
   //
   //Dashboard
   const accessComplain = async (e: React.FormEvent) => {
@@ -252,6 +266,62 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
       });
     }
   };
+  //   //
+  //   //Delete Complain
+
+  const deleteComplain = async (id: string) => {
+    const token = localStorage.getItem("cm");
+    if (!token) {
+      toast.error("You are not authenticated", {
+        position: "top-center",
+        className: "toast-message",
+      });
+      navigate("/home", { replace: true });
+      return;
+    } else {
+      try {
+        let response: any = await complainDelete(id, token);
+        if (response) {
+          // Update the local state to remove the deleted complain
+          setData((prevData) =>
+            prevData.filter((complain) => complain.id !== id),
+          );
+          toast.success("Complain deleted successfully", {
+            position: "top-center",
+            className: "toast-message",
+          });
+          navigate("/dashboard", { replace: true });
+        } else {
+          toast.error("Failed to delete complain: " + response.message, {
+            position: "top-center",
+            className: "toast-message",
+          });
+        }
+      } catch (error) {
+        toast.error("Error deleting complain: " + error, {
+          position: "top-center",
+          className: "toast-message",
+        });
+      }
+    }
+  };
+
+  const accessCompany = async (): Promise<{ _id: string; name: string }[]> => {
+    const token = localStorage.getItem("cm");
+    if (!token) {
+      toast.error("Please sign up or log in before registering a complaint.", {
+        position: "top-center",
+        className: "toast-message",
+      });
+      return [];
+    }
+    const response: any = await accessComapanyList(token);
+    if (response) {
+      return response.company;
+    } else {
+      return [];
+    }
+  };
   return (
     <ProjectContext.Provider
       value={{
@@ -271,6 +341,8 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         complaints,
         reply,
         handleReply,
+        deleteComplain,
+        accessCompany,
       }}
     >
       {children}

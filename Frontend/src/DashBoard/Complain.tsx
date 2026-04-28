@@ -2,10 +2,11 @@ import { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Complain.css";
 import { ProjectContext } from "../ContextAPI/Context/context";
+import { MdOutlineDeleteForever } from "react-icons/md";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 const Complain = () => {
-  const { data } = useContext(ProjectContext)!;
+  const { data, deleteComplain } = useContext(ProjectContext)!;
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const toggleExpand = (index: number) => {
@@ -54,7 +55,7 @@ const Complain = () => {
                             <div className="status-line flex-fill"></div>
                           )}
                           <span
-                            className={`badge rounded-circle p-2 ${badgeColor}`}
+                            className={`badge rounded-circle ${badgeColor}`}
                           >
                             {i + 1}
                           </span>
@@ -70,16 +71,23 @@ const Complain = () => {
                       </div>
                     );
                   })}
+                  <span
+                    className="deleteComplain"
+                    onClick={() => deleteComplain(complain.id)}
+                  >
+                    <MdOutlineDeleteForever />
+                  </span>
                 </div>
 
                 {/* TITLE & DATE */}
-                <h5 className="card-title fw-bold text-dark">
+                <h5 className="card-title fw-bold text-dark double-underline">
                   {complain.title}
                 </h5>
-                <p className="text-secondary small mb-2">{complain.date}</p>
-
+                <p className="text-secondary small mb-2 ">{complain.date}</p>
+                <hr></hr>
                 {/* DESCRIPTION */}
                 <p className="card-text description mb-2">
+                  <b>Complain Description: &nbsp;</b>
                   {expanded
                     ? complain.description
                     : complain.description.slice(0, 120) +
@@ -94,6 +102,7 @@ const Complain = () => {
                     {expanded ? "Show less" : "Read more"}
                   </span>
                 )}
+                <hr></hr>
 
                 {/* REPLY */}
                 <div className="replyBox mt-3">
@@ -109,6 +118,7 @@ const Complain = () => {
                     <p className="text-muted fst-italic">No reply yet</p>
                   )}
                 </div>
+                <hr></hr>
               </div>
             </div>
           );
