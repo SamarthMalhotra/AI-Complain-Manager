@@ -23,7 +23,8 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
         description: req.body.description,
         contractNumber: req.body.contractNumber,
         status: 2,
-        company: req.body.complain,
+        company: company._id,
+        product: req.body.product,
       };
       const user = await signup.findOne({ email });
       if (!user) {
@@ -49,7 +50,14 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
 router.get("/status", jwtAuthMiddleware, async (req, res) => {
   try {
     const email = req.user.email;
-    const user = await signup.findOne({ email }).populate("complain");
+    const user = await signup.findOne({ email }).populate({
+      path: "complain",
+      populate: {
+        path: "company",
+        select: "name",
+      },
+    });
+    //.populate("company", "name"); // Populate company name only
     if (!user || !user.complain) {
       return res.status(404).json({ message: "Complain doest not exist." });
     } else {

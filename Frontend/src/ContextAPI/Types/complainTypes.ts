@@ -6,4 +6,6 @@ export type ComplainStore = {
   index: number;
   reply?: string;
   id: string;
+  company: { _id: string; name: string };
+  product: string;
 };

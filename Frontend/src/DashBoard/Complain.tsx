@@ -78,7 +78,10 @@ const Complain = () => {
                     <MdOutlineDeleteForever />
                   </span>
                 </div>
-
+                {/* COMPANY & PRODUCT */}
+                <h6 className=" text-dark fw-bold mb-3">
+                  {complain.company.name} , {complain.product}
+                </h6>
                 {/* TITLE & DATE */}
                 <h5 className="card-title fw-bold text-dark double-underline">
                   {complain.title}

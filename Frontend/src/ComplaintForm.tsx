@@ -15,7 +15,8 @@ const ComplaintForm: React.FC = () => {
   //Fetch the company list
   useEffect(() => {
     const fetchData = async () => {
-      const data = await accessCompany();
+      let data: { _id: string; name: string }[] = await accessCompany();
+      console.log(data);
       setCompanyList((prev) => [...prev, ...data]);
     };
     fetchData();
@@ -48,13 +49,13 @@ const ComplaintForm: React.FC = () => {
             style={{ width: "500px" }}
           >
             <form onSubmit={submitComplain}>
-              <fieldset className="border p-4 rounded-4">
-                <legend className="float-none w-auto px-3 fw-bold text-primary">
+              <fieldset className="border p-2 rounded-4">
+                <legend className="float-none w-auto px-2 fw-bold text-primary">
                   Register Complaint
                 </legend>
 
                 {/* Select Company*/}
-                <div className="mb-2">
+                <div className="mb-1">
                   <label className="form-label fw-semibold">
                     Product Brand
                   </label>
@@ -72,8 +73,20 @@ const ComplaintForm: React.FC = () => {
                     ))}
                   </select>
                 </div>
+                <div className="mb-1">
+                  <label className="form-label fw-semibold">Product Name</label>
+                  <input
+                    type="text"
+                    className="form-control rounded-3"
+                    name="product"
+                    value={complainForm.product}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter your product detail"
+                  />
+                </div>
                 {/* Title */}
-                <div className="mb-2">
+                <div className="mb-1">
                   <label className="form-label fw-semibold">Title</label>
                   <select
                     className="form-select rounded-3"
@@ -92,7 +105,7 @@ const ComplaintForm: React.FC = () => {
                 </div>
 
                 {/* Date */}
-                <div className="mb-2">
+                <div className="mb-1">
                   <label className="form-label fw-semibold">Date</label>
                   <input
                     type="date"
@@ -105,7 +118,7 @@ const ComplaintForm: React.FC = () => {
                 </div>
 
                 {/* Description */}
-                <div className="mb-2">
+                <div className="mb-1">
                   <label className="form-label fw-semibold">Description</label>
                   <textarea
                     className="form-control rounded-3"

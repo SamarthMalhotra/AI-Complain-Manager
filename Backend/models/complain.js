@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 const complainSchema = new mongoose.Schema(
   {
+    product: {
+      type: String,
+      required: [true, "Product Name is Mendatory"],
+      trim: true,
+    },
     title: {
       type: String,
       required: [true, "Complain Issue is Mendatory"],

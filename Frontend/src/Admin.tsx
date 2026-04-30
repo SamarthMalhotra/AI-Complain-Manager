@@ -5,7 +5,25 @@ import "./Admin.css";
 
 const AdminPanel: React.FC = () => {
   const { complaints, reply, handleReply } = useContext(ProjectContext)!;
-
+  const [disable, setdisabled] = React.useState(false);
+  const handleClick = (id: string, e: React.FormEvent, oldReply?: string) => {
+    if (reply.current) {
+      const newReply = reply.current.value.trim();
+      if (newReply === "") {
+        alert("Reply cannot be empty.");
+        return;
+      }
+      if (newReply === oldReply) {
+        alert("Reply is unchanged. Please modify it before submitting.");
+        return;
+      }
+      setdisabled(true);
+      handleReply(id, e, oldReply);
+      setTimeout(() => {
+        setdisabled(false);
+      }, 3000);
+    }
+  };
   // ✅ Correct Stats
   const total = complaints.length;
   const pending = complaints.filter((c) => c.status < 3).length;
@@ -74,8 +92,8 @@ const AdminPanel: React.FC = () => {
                       placeholder={`${comp.reply}`}
                     />
                     <button
-                      className="btn btn-primary w-100 mt-2"
-                      onClick={(e) => handleReply(comp._id, e, comp.reply)}
+                      className={`btn btn-primary w-100 mt-2 ${disable ? "disabled" : ""}`}
+                      onClick={(e) => handleClick(comp._id, e, comp.reply)}
                     >
                       {comp.status < 3 ? "Send Reply" : "Edit Reply"}
                     </button>

@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { type ComplainStore } from "../Types/complainTypes.ts";
+import isTokenExpired from "../Services/jwtToken.ts";
 // IT is for children type
 interface ProjectContextChild {
   children: ReactNode;
@@ -43,6 +44,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
     contractNumber: "",
     status: 0,
     company: "",
+    product: "",
   });
   //Navigate
   const navigate = useNavigate();
@@ -146,7 +148,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
       } else {
         let ans = reply.current.value;
         if (oldReply != "" && oldReply != null) {
-          ans = oldReply + ans;
+          ans = oldReply + "\n" + ans;
         }
         const response = await adminReply(ans, token, id);
         console.log(response.message);
@@ -216,6 +218,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         contractNumber: "",
         status: 0,
         company: "",
+        product: "",
       });
       setSubmit(false);
       navigate("/home");
@@ -255,6 +258,8 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         index: count++,
         reply: complain.reply,
         id: complain._id,
+        company: complain.company,
+        product: complain.product,
       }));
 
       setData(complainData);
@@ -308,17 +313,26 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
 
   const accessCompany = async (): Promise<{ _id: string; name: string }[]> => {
     const token = localStorage.getItem("cm");
-    if (!token) {
+    if (!token || isTokenExpired(token)) {
       toast.error("Please sign up or log in before registering a complaint.", {
         position: "top-center",
         className: "toast-message",
       });
+      navigate("/home", { replace: true });
       return [];
     }
-    const response: any = await accessComapanyList(token);
-    if (response) {
-      return response.company;
-    } else {
+    try {
+      let response: any = await accessComapanyList(token);
+      if (response && response.company) {
+        return response.company;
+      } else {
+        throw new Error("Failed to fetch company list: " + response.message);
+      }
+    } catch (error) {
+      toast.error("Error fetching company list: " + error, {
+        position: "top-center",
+        className: "toast-message",
+      });
       return [];
     }
   };

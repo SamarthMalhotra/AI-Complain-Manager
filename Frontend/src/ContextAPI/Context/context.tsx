@@ -10,6 +10,7 @@ type signupForm = {
 type complain = {
   company: string;
   title: string;
+  product: string;
   date: string;
   description: string;
   contractNumber: string;

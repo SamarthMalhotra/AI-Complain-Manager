@@ -1,11 +1,25 @@
 import signup from "../models/signup.js";
 import express from "express";
 import { generateToken } from "../jwt.js";
-// Signup
+import emailValidator from "node-email-verifier";
+
+// // Basic validation (format + MX checking)
+// async function validateEmail(email) {
+//   try {
+//     const isValid = await emailValidator(email);
+//   } catch (error) {
+//     console.error("Validation error:", error);
+//   }
+// }
+// Signupcd
 const router = express.Router();
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    const isValid = await emailValidator(email);
+    if (!isValid) {
+      return res.status(400).json({ message: "Invalid Email." });
+    }
     const user = await signup.create({ username, email, password });
     const token = generateToken(user);
     res.status(201).json({ message: "Signup Successful", token: token });
@@ -19,6 +33,10 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
+    const isValid = await emailValidator(email);
+    if (!isValid) {
+      return res.status(400).json({ message: "Invalid Email." });
+    }
     const user = await signup.findOne({ email });
     if (!user) {
       res
