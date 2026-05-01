@@ -1,0 +1,43 @@
+.brand-container {
+  overflow: hidden;
+  width: 120vw;
+  position: fixed;
+  bottom: 20px;
+  z-index: 10;
+}
+.brand-slide img {
+  height: 70px;
+  object-fit: contain;
+}
+img[alt="Dell"] {
+  height: 150px !important;
+}
+
+img[alt="HP"] {
+  height: 120px;
+}
+
+img[alt="Lenovo"] {
+  height: 100px;
+}
+.brand-track {
+  display: flex;
+  width: 200%; /* important */
+}
+
+.brand-slide {
+  display: flex;
+  gap: 200px; /* reduce from 200 for smoother flow */
+  width: max-content;
+  animation: scroll 10s linear infinite;
+}
+
+/* LEFT → RIGHT smooth */
+@keyframes scroll {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./ComplaintPage.css";
+//import Brands from "./Brands";
 const ComplaintPage: React.FC = () => {
   const navigator = useNavigate();
   return (
