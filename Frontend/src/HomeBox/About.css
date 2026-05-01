@@ -117,6 +117,9 @@
 
 /* SMALL MOBILE */
 @media (max-width: 480px) {
+  .about {
+    height: 95vh;
+  }
   .about-title {
     font-size: 1.5rem;
   }
