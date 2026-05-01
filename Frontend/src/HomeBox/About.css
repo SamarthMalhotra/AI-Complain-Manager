@@ -1,0 +1,131 @@
+.about {
+  padding: 60px 40px;
+  background: #0f172a;
+  color: white;
+  height: 78vh;
+}
+
+.about-container {
+  max-width: 90vw;
+  margin: auto;
+}
+
+/* GRID */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: normal;
+  gap: 195px;
+}
+
+/* LEFT SIDE */
+.about-title {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.about-description {
+  color: #cbd5f5;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+}
+
+.about-mission {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* RIGHT SIDE */
+.about-right {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  align-self: flex-end;
+}
+
+.services-title {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+}
+
+.services-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* TABLET VIEW */
+@media (max-width: 992px) {
+  .about-grid {
+    gap: 30px;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+  .about {
+    padding: 40px 15px;
+    height: 95vh;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+    text-align: left;
+  }
+
+  .about-description {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  .about-mission {
+    padding: 18px;
+    text-align: left;
+  }
+
+  .about-right {
+    padding: 20px;
+  }
+
+  .services-title {
+    text-align: left;
+    font-size: 1.3rem;
+  }
+
+  .services-list li {
+    text-align: left;
+    padding: 10px 0;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.5rem;
+  }
+
+  .about-description {
+    font-size: 0.9rem;
+  }
+
+  .services-list li {
+    font-size: 0.85rem;
+  }
+}
