@@ -41,3 +41,22 @@ img[alt="Lenovo"] {
     transform: translateX(0%);
   }
 }
+@media (max-width: 600px) {
+  .brand-slide {
+    display: flex;
+    gap: 100px; /* reduce from 200 for smoother flow */
+    width: max-content;
+    animation: scroll 10s linear infinite;
+  }
+  .brand-slide img {
+    height: 70px;
+    object-fit: contain;
+  }
+  .brand-container {
+    overflow: hidden;
+    width: 120vw;
+    position: fixed;
+    bottom: 40px;
+    z-index: 10;
+  }
+}
