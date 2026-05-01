@@ -77,12 +77,12 @@
 @media (max-width: 768px) {
   .about {
     padding: 40px 15px;
-    height: 95vh;
+    height: 100vh;
   }
 
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 20px;
   }
 
   .about-title {
@@ -118,7 +118,7 @@
 /* SMALL MOBILE */
 @media (max-width: 480px) {
   .about {
-    height: 95vh;
+    height: 100vh;
   }
   .about-title {
     font-size: 1.5rem;
