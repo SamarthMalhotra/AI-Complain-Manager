@@ -34,7 +34,8 @@ interface ProjectContextType {
   role: RefObject<string>;
   adminComplain: (e: React.FormEvent) => void;
   complaints: Complaint[];
-  reply: RefObject<HTMLTextAreaElement | null>;
+  reply: string;
+  setReply: React.Dispatch<React.SetStateAction<string>>;
   handleReply: (id: string, e: React.FormEvent, oldReply?: string) => void;
   deleteComplain: (id: string) => void;
   accessCompany: () => Promise<Array<{ _id: string; name: string }>>;

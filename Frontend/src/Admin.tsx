@@ -4,11 +4,14 @@ import { ProjectContext } from "./ContextAPI/Context/context";
 import "./Admin.css";
 
 const AdminPanel: React.FC = () => {
-  const { complaints, reply, handleReply } = useContext(ProjectContext)!;
-  const [disable, setdisabled] = React.useState(false);
+  const { complaints, reply, handleReply, setReply } =
+    useContext(ProjectContext)!;
+  const [disabledButtons, setDisabledButtons] = React.useState<{
+    [key: string]: boolean;
+  }>({});
   const handleClick = (id: string, e: React.FormEvent, oldReply?: string) => {
-    if (reply.current) {
-      const newReply = reply.current.value.trim();
+    if (reply) {
+      const newReply = reply.trim();
       if (newReply === "") {
         alert("Reply cannot be empty.");
         return;
@@ -17,11 +20,17 @@ const AdminPanel: React.FC = () => {
         alert("Reply is unchanged. Please modify it before submitting.");
         return;
       }
-      setdisabled(true);
+      setDisabledButtons((prev) => ({
+        ...prev,
+        [id]: true,
+      }));
       handleReply(id, e, oldReply);
       setTimeout(() => {
-        setdisabled(false);
-      }, 3000);
+        setDisabledButtons((prev) => ({
+          ...prev,
+          [id]: false,
+        }));
+      }, 5000);
     }
   };
   // ✅ Correct Stats
@@ -87,12 +96,13 @@ const AdminPanel: React.FC = () => {
                   <div className="mt-2">
                     <textarea
                       className="form-control w-100 reply-box"
-                      ref={reply}
+                      value={reply}
+                      onChange={(e) => setReply(e.target.value)}
                       rows={4}
                       placeholder={`${comp.reply}`}
                     />
                     <button
-                      className={`btn btn-primary w-100 mt-2 ${disable ? "disabled" : ""}`}
+                      className={`btn btn-primary w-100 mt-2 ${disabledButtons[comp._id] ? "disabled" : ""}`}
                       onClick={(e) => handleClick(comp._id, e, comp.reply)}
                     >
                       {comp.status < 3 ? "Send Reply" : "Edit Reply"}

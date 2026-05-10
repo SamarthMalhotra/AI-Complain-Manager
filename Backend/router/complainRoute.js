@@ -67,7 +67,7 @@ router.get("/status", jwtAuthMiddleware, async (req, res) => {
     res.status(500).json({ message: "Internal Server Error." });
   }
 });
-
+//Delete Complain
 router.delete("/delete", jwtAuthMiddleware, async (req, res) => {
   try {
     const complainId = req.body.id;

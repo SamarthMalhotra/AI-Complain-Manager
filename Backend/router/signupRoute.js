@@ -11,7 +11,7 @@ import emailValidator from "node-email-verifier";
 //     console.error("Validation error:", error);
 //   }
 // }
-// Signupcd
+// Signup
 const router = express.Router();
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
@@ -39,19 +39,21 @@ router.post("/login", async (req, res) => {
     }
     const user = await signup.findOne({ email });
     if (!user) {
-      res
+      return res
         .status(404)
         .json({ message: "You are not existing user go for SignUp." });
     } else if (await user.comparePassword(password)) {
       const token = generateToken(user);
-      res
+      return res
         .status(201)
         .json({ message: "Welcome", token: token, role: user.role });
     } else {
-      res.status(401).json({ message: "Incorrect Password." });
+      return res.status(401).json({ message: "Incorrect Password." });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error logging in", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Error logging in", error: error.message });
   }
 });
 export default router;

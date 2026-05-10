@@ -30,7 +30,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [submit, setSubmit] = useState(false); //Form Data
   const role = useRef("User");
-  const reply = useRef<HTMLTextAreaElement | null>(null);
+  const [reply, setReply] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -131,6 +131,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
     oldReply?: string,
   ) => {
     e.preventDefault();
+    console.log("Reply: ", reply);
     try {
       const token: string | null = localStorage.getItem("cm");
       if (!token) {
@@ -139,14 +140,14 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
           className: "toast-message",
         });
       }
-      if (!reply.current) {
+      if (!reply || reply.trim() === "") {
         toast.error("Error Reply is Empty . \n Please reply again.", {
           position: "top-center",
           className: "toast-message",
         });
         return;
       } else {
-        let ans = reply.current.value;
+        let ans = reply.trim();
         if (oldReply != "" && oldReply != null) {
           ans = oldReply + "\n" + ans;
         }
@@ -357,6 +358,7 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         handleReply,
         deleteComplain,
         accessCompany,
+        setReply,
       }}
     >
       {children}

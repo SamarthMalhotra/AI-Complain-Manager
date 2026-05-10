@@ -20,7 +20,7 @@ const server = express();
 server.use(
   cors({
     origin: "https://ai-complain-manager-frontend.onrender.com",
-    //origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );

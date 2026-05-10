@@ -18,6 +18,7 @@ router.get("/access", jwtAuthMiddleware, async (req, res) => {
     }
   }
 });
+//Access Specific Company Complains
 router.post("/id", jwtAuthMiddleware, async (req, res) => {
   const { id } = req.user;
   const user = await Signup.findById(id);
