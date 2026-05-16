@@ -39,5 +39,10 @@ interface ProjectContextType {
   handleReply: (id: string, e: React.FormEvent, oldReply?: string) => void;
   deleteComplain: (id: string) => void;
   accessCompany: () => Promise<Array<{ _id: string; name: string }>>;
+  companyList: Array<{ _id: string; name: string }>;
+  setCompanyList: React.Dispatch<
+    React.SetStateAction<Array<{ _id: string; name: string }>>
+  >;
+  getCompanyComplaints: (companyId: string) => void;
 }
 export const ProjectContext = createContext<ProjectContextType | null>(null);

@@ -33,7 +33,8 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
         const complain1 = new Complain(complain);
         const com = await complain1.save();
         user.complain.unshift(com._id);
-
+        company.complains.unshift(com._id);
+        await company.save();
         //await sendMail(complain, user);
 
         await user.save();

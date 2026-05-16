@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProjectContext } from "./ContextAPI/Context/context";
 import { TailSpin } from "react-loader-spinner";
 const ComplaintForm: React.FC = () => {
@@ -8,15 +8,14 @@ const ComplaintForm: React.FC = () => {
     submitComplain,
     submit,
     accessCompany,
+    companyList,
+    setCompanyList,
   } = useContext(ProjectContext)!;
-  const [companyList, setCompanyList] = useState([
-    { _id: "", name: "Select the Company" },
-  ]);
+
   //Fetch the company list
   useEffect(() => {
     const fetchData = async () => {
       let data: { _id: string; name: string }[] = await accessCompany();
-      console.log(data);
       setCompanyList((prev) => [...prev, ...data]);
     };
     fetchData();

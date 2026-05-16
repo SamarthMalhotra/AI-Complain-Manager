@@ -8,6 +8,7 @@ import {
   adminReply,
   complainDelete,
   accessComapanyList,
+  getCompanyComplain,
 } from "../Services/complainService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,9 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
   const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [submit, setSubmit] = useState(false); //Form Data
   const role = useRef("User");
+  const [companyList, setCompanyList] = useState([
+    { _id: "", name: "Select the Company" },
+  ]);
   const [reply, setReply] = useState("");
   const [formData, setFormData] = useState({
     username: "",
@@ -337,6 +341,59 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
       return [];
     }
   };
+  //Get Complain of a particulas comp
+  const getCompanyComplaints = async (companyId: string) => {
+    const token = localStorage.getItem("cm");
+    if (!token) {
+      toast.error("You are not authenticated", {
+        position: "top-center",
+        className: "toast-message",
+      });
+      navigate("/home", { replace: true });
+      return;
+    }
+    try {
+      const result = await getCompanyComplain(token, companyId);
+      if (result && result.company.complains) {
+        if (result.company.complains.length === 0) {
+          toast.info("No complaints found for this company.", {
+            position: "top-center",
+            className: "toast-message",
+          });
+          setComplaints([]);
+        } else {
+          setComplaints(
+            result.company.complains.map((complain: any) => {
+              return {
+                _id: complain._id,
+                title: complain.title,
+                status: complain.status,
+                description: complain.description,
+                date: complain.date,
+                reply: complain.reply,
+                company: complain.company,
+              };
+            }),
+          );
+          toast.success("Company complaints loaded.", {
+            position: "top-center",
+            className: "toast-message",
+          });
+        }
+      } else {
+        toast.error("Failed to load company complaints: " + result.message, {
+          position: "top-center",
+          className: "toast-message",
+        });
+        setComplaints([]);
+      }
+    } catch (error: any) {
+      toast.error("Error loading company complaints: " + error.message, {
+        position: "top-center",
+        className: "toast-message",
+      });
+    }
+  };
   return (
     <ProjectContext.Provider
       value={{
@@ -359,6 +416,9 @@ export const ProjectProvider = ({ children }: ProjectContextChild) => {
         deleteComplain,
         accessCompany,
         setReply,
+        companyList,
+        setCompanyList,
+        getCompanyComplaints,
       }}
     >
       {children}

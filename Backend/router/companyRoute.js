@@ -27,8 +27,8 @@ router.post("/id", jwtAuthMiddleware, async (req, res) => {
   } else if (user.role !== "Admin") {
     return res.status(403).json({ message: "Only Admin can access company" });
   } else {
-    const { id } = req.body;
-    const company = await Company.findById(id, {
+    const { _id } = req.body;
+    const company = await Company.findById(_id, {
       _id: 1,
       name: 1,
       complains: 1,

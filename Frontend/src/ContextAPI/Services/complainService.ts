@@ -32,6 +32,7 @@ export const adminReply = async (
     body: JSON.stringify({ reply, id }),
   });
   const result = await res.json();
+  console.log(result);
   if (!res.ok) {
     throw new Error(result.message);
   }
@@ -90,4 +91,20 @@ export const accessComapanyList = async (token: string) => {
     },
   });
   return response.json();
+};
+export const getCompanyComplain = async (token: string, id: string) => {
+  const response = await fetch(`${Url}/api/company/id`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ _id: id }),
+  });
+  if (!response.ok) {
+    throw new Error("Error Occur");
+    return;
+  } else {
+    return response.json();
+  }
 };
