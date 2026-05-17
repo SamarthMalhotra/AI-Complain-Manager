@@ -39,7 +39,7 @@
 }
 
 .footer-section ul li {
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .footer-section ul li a {
@@ -61,7 +61,7 @@
 }
 
 .social-icons a {
-  font-size: 2rem;
+  font-size: 1.6rem;
   cursor: pointer;
   color: white;
 }
@@ -120,7 +120,7 @@
   }
 
   .footer-section ul li {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 }
 

@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
       <div className="footer-container">
         {/* BRAND */}
         <div className="footer-section brand">
-          <h2 className="logo">🤖 AI Manager</h2>
+          <h2>🤖 AI Manager</h2>
           <p className="footer-text">
             Smart AI-powered complaint management platform helping businesses
             automate workflows and improve customer satisfaction.
